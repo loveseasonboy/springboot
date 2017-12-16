@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<!--namespace 为域名空间一般来指定那个接口 其他的好想不行-->
+<mapper namespace="dao.BaseDao">
+
+    <select id="findAll" resultType="hospital">
+        SELECT * FROM yiyuan
+    </select>
+    <select id="findOneById" parameterType="int" resultType="HashMap">
+        SELECT * FROM yiyuan WHERE id= #{id}
+    </select>
+    <!--
+        不用实体类的使用方式
+        方式一：
+        Map<String, Object> findOne(@Param("val") int val, @Param("name") String name);
+        <select id="findOne" resultType="HashMap">
+            SELECT * FROM yiyuan WHERE id= #{val,javaType=int} AND name LIKE #{name,jdbcType=VARCHAR}
+        </select>
+        方式二：
+        Map<String, Object> findOne(int val, String name);
+        <select id="findOne" resultType="HashMap">
+            SELECT * FROM yiyuan WHERE id= #{0} AND name LIKE #{1}
+        </select>
+        方式三：不建议用
+        Map<String, Object> findOne(Map map);
+        <select id="findOne" resultType="HashMap">
+            SELECT * FROM yiyuan WHERE id= #{val,javaType=int} AND name LIKE #{name,jdbcType=VARCHAR}
+        </select>
+    -->
+    <select id="findOne" resultType="HashMap">
+        SELECT * FROM yiyuan WHERE id= #{id,javaType=int} AND name LIKE #{name,jdbcType=VARCHAR}
+    </select>
+    <!--总结一下
+    $是获取的参数不加任何的''直接放到sql语句中，易sql注入
+    #是后去参数变成预编译为？，并且根据类型变成''包裹。
+    id一定是唯一的，不然会找不到值。
+    模糊查询
+    '%${_parameter}%'；
+    _parameter 默认的状态下的，必须是这个，要不然找不到对应的值，除非用注解@param('name') ${name}
+    就可以找到了
+    -->
+    <select id="findOneByName" parameterType="String" resultType="HashMap">
+        <bind name="pattern" value="'%'+name+'%'"/>
+        SELECT * FROM yiyuan WHERE name LIKE #{pattern}
+    </select>
+    <!--resultMap 自定义结果集-->
+    <resultMap id="getData" type="map">
+        <id property="id" column="id"/>
+        <result property="na" column="name"/>
+    </resultMap>
+    <select id="test1" resultMap="getData">
+        SELECT id,name FROM yiyuan
+    </select>
+</mapper>

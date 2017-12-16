@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
+<configuration>
+    <!--定义别名，用来定义哪些包名太长的类或接口-->
+    <typeAliases>
+        <typeAlias alias="hospital" type="entity.Hospital"></typeAlias>
+    </typeAliases>
+</configuration> 

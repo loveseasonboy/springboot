@@ -15,7 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
  */
 @EnableAutoConfiguration
 @SpringBootApplication
-@ComponentScan(basePackages = {"controller"})
+@ComponentScan(basePackages = {"controller","dataCore"})
 @Import(MyBatisConfig.class)
 public class InitWeb {
 

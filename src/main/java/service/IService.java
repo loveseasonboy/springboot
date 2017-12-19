@@ -7,4 +7,5 @@ import java.util.List;
 public interface IService {
 
     List<Hospital> getHospitalList();
+    Hospital getHospital();
 }

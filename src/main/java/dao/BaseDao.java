@@ -1,7 +1,7 @@
 package dao;
 
 import entity.Hospital;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +11,10 @@ import java.util.Map;
  *
  * @author 何海东
  */
+//@Mapper
 public interface BaseDao {
+   // @Select("SELECT * FROM yiyuan")
+   // @Results
     List<Hospital> findAll();
 
     Map<String, Object> findOneById(int val);

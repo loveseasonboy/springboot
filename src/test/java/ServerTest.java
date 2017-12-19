@@ -15,7 +15,7 @@ import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 //@SpringBootTest
-//@ContextConfiguration(classes={ServerInit.class})
+@ContextConfiguration(classes={ServerInit.class})
 public class ServerTest {
 
     @Autowired()

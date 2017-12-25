@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 @SpringBootApplication
 //@Import(MyBatisConfig.class)
-@ComponentScan(basePackages={"service"})
+@ComponentScan(basePackages={"service","dataCore"})
 //@MapperScan(basePackages = {"dao"})
 public class ServerInit {
     public static void main(String[] args) {

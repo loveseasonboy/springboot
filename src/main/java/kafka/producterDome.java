@@ -22,7 +22,15 @@ public class producterDome {
 
         Producer<String, String> producer = new KafkaProducer<>(props);
         for (int i = 0; i < 100; i++) {
-            producer.send(new ProducerRecord<>("cluster", Integer.toString(i), "hello world" + Integer.toString(i)));
+//            producer.send(new ProducerRecord<>("cluster", Integer.toString(i), "hello world" + Integer.toString(i)));
+            producer.send(new ProducerRecord<>("cluster", Integer.toString(i), "hello world" + Integer.toString(i)), (metadata, exception) -> {
+                if (metadata != null) {
+                    System.err.printf("Send record partition:%d,offset:%d,keySize:%d,valueSize:%d %n", metadata.partition(), metadata.offset(), metadata.serializedKeySize(), metadata.serializedValueSize());
+                }
+                if (exception != null) {
+                    exception.printStackTrace();
+                }
+            });
         }
         producer.close();
     }

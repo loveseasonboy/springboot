@@ -25,6 +25,10 @@ public class consumerDemo {
         props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("metrics.log.level", "info");
+
+        props.put("offsets.storage","kafka");//将offset存于kafka和zookeeper中
+        props.put("dual.commit.enabled","true");//只有这个设置为true才会生效
+
         KafkaConsumer consumer = new KafkaConsumer(props);
         //consumer.subscribe(Arrays.asList("cluster"));//必须要订阅一下  自动分配的partition
         TopicPartition topicPartition = new TopicPartition("cluster", 0);//手动分配partition
